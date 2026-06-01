@@ -1,10 +1,10 @@
+import json
 from player import Player
-
 
 class TicTacToe:
     def __init__(self):
         self.board = [" " for _ in range(9)]
-
+        
         player1_name = input("Enter Player 1 name (X): ")
         player2_name = input("Enter Player 2 name (O): ")
 
@@ -13,6 +13,31 @@ class TicTacToe:
 
         self.current_player = self.player1
         self.draws = 0
+
+        self.load_stats()
+    
+    def load_stats(self):
+        try:
+            with open("stats.json", "r") as file:
+                stats = json.load(file)
+                self.player1.wins = stats["player1_wins"]
+                self.player2.wins = stats["player2_wins"]
+                self.draws = stats["draws"]
+
+        except FileNotFoundError:
+            self.player1.wins = 0
+            self.player2.wins = 0
+            self.draws = 0
+
+    def save_stats(self):
+        stats = {
+            "player1_wins": self.player1.wins,
+            "player2_wins": self.player2.wins,
+            "draws": self.draws
+        }
+
+        with open("stats.json", "w") as file:
+            json.dump(stats, file, indent=4)
 
     def display_board(self):
         display = []
@@ -88,11 +113,7 @@ class TicTacToe:
             self.display_board()
 
             try:
-                move = int(
-                    input(
-                        f"{self.current_player.name} ({self.current_player.symbol}), choose a position (1-9): "
-                    )
-                ) - 1
+                move = int(input(f"{self.current_player.name} ({self.current_player.symbol}), choose a position (1-9): ")) - 1
 
                 if move < 0 or move > 8:
                     print("Please enter a number between 1 and 9.")
@@ -110,20 +131,16 @@ class TicTacToe:
 
             if winner:
                 self.display_board()
-
                 print(f"{self.current_player.name} wins!")
-
                 self.current_player.wins += 1
-
+                self.save_stats()
                 break
 
             if self.is_draw():
                 self.display_board()
-
                 print("It's a draw!")
-
                 self.draws += 1
-
+                self.save_stats()
                 break
 
             self.switch_player()
