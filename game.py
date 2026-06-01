@@ -15,12 +15,20 @@ class TicTacToe:
         self.draws = 0
 
     def display_board(self):
+        display = []
+
+        for i in range(9):
+            if self.board[i] == " ":
+                display.append(str(i + 1))
+            else:
+                display.append(self.board[i])
+
         print()
-        print(f" {self.board[0]} | {self.board[1]} | {self.board[2]} ")
+        print(f" {display[0]} | {display[1]} | {display[2]} ")
         print("---+---+---")
-        print(f" {self.board[3]} | {self.board[4]} | {self.board[5]} ")
+        print(f" {display[3]} | {display[4]} | {display[5]} ")
         print("---+---+---")
-        print(f" {self.board[6]} | {self.board[7]} | {self.board[8]} ")
+        print(f" {display[6]} | {display[7]} | {display[8]} ")
         print()
 
     def reset_board(self):
@@ -67,11 +75,13 @@ class TicTacToe:
             self.current_player = self.player1
 
     def display_scoreboard(self):
-        print("\n===== SCOREBOARD =====")
-        print(f"{self.player1.name}: {self.player1.wins}")
-        print(f"{self.player2.name}: {self.player2.wins}")
+        print("\n========================")
+        print("      SCOREBOARD")
+        print("========================")
+        print(f"{self.player1.name} ({self.player1.symbol}): {self.player1.wins}")
+        print(f"{self.player2.name} ({self.player2.symbol}): {self.player2.wins}")
         print(f"Draws: {self.draws}")
-        print("======================\n")
+        print("========================\n")
 
     def play_single_game(self):
         while True:
