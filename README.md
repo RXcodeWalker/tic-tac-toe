@@ -1,104 +1,168 @@
-# Tic-Tac-Toe (Python)
+# Tic-Tac-Toe Game
 
-## Overview
+A command-line implementation of Tic-Tac-Toe demonstrating object-oriented design, persistent data management, and robust user input handling in Python.
 
-This project is a command-line Tic-Tac-Toe game built in Python using object-oriented programming principles. It supports two human players, tracks scores across multiple games, and stores statistics permanently using a JSON file.
+## Why I Built This
 
-The project was created to practice Python programming concepts such as classes, functions, file handling, error handling, game state management, and data persistence.
-
----
+I wanted to build something complete—not just a tutorial project, but an actual game you could play multiple times and it would remember the scores. It seemed simple enough to understand quickly, but complex enough to explore core programming concepts like classes, file handling, and error checking. Plus, I enjoyed the challenge of building something with a clear purpose that works reliably from start to finish.
 
 ## Features
 
-### Core Gameplay
+- **Two-player gameplay** with custom player names and turn-based mechanics
+- **Intelligent win/draw detection** using pattern matching against all 8 winning combinations
+- **Persistent scoreboard** that automatically saves and loads player statistics between sessions via JSON
+- **Robust input validation** with comprehensive error handling for invalid moves and out-of-range inputs
+- **Intuitive board interface** with numbered positions (1-9) for easy move entry
+- **Replay system** allowing multiple consecutive games with scoreboard tracking
 
-- Two-player Tic-Tac-Toe
-- Turn-based gameplay
-- Win detection
-- Draw detection
-- Input validation
-- Replay system
+## Technologies Used
 
-### Player System
-
-- Custom player names
-- Player symbols (X and O)
-- Individual win tracking
-
-### Scoreboard
-
-- Displays wins for each player
-- Tracks total draws
-- Updates automatically after every game
-
-### Persistent Statistics
-
-- Saves game statistics to a JSON file
-- Loads statistics automatically when the game starts
-- Preserves scores between program runs
-
-### User Experience Improvements
-
-- Numbered board positions (1–9)
-- Clear game status messages
-- Improved scoreboard formatting
-- Friendly error messages
-
----
+- **Python 3** — Core language
+- **JSON** — Data persistence for game statistics
+- **Object-Oriented Programming** — Modular class-based architecture
 
 ## Project Structure
 
-```text
+```
 tic-tac-toe/
-│
-├── main.py
-├── game.py
-├── player.py
-├── stats.json
-├── README.md
-└── __pycache__/
+├── main.py          # Application entry point
+├── game.py          # TicTacToe class with core game logic
+├── player.py        # Player class for tracking player state
+├── stats.json       # Persistent statistics storage
+└── README.md        # Project documentation
 ```
 
-### File Descriptions
+### Key Files
 
-#### main.py
+| File         | Purpose                                                                              |
+| ------------ | ------------------------------------------------------------------------------------ |
+| `main.py`    | Initializes and runs the game                                                        |
+| `game.py`    | Handles board management, move validation, win detection, and statistics persistence |
+| `player.py`  | Represents individual players with name, symbol, and win count                       |
+| `stats.json` | JSON file storing cumulative player wins and draws                                   |
 
-Application entry point. Creates a game object and starts the program.
+## Installation
 
-#### game.py
+1. Ensure Python 3.6+ is installed:
 
-Contains the main game logic:
+   ```bash
+   python --version
+   ```
 
-- Board management
-- Move validation
-- Win detection
-- Draw detection
-- Scoreboard
-- Statistics loading/saving
+2. Clone or download this repository:
 
-#### player.py
+   ```bash
+   git clone <repository-url>
+   cd tic-tac-toe
+   ```
 
-Defines the Player class.
+3. No external dependencies required — only Python standard library (json module).
 
-Each player stores:
+## Usage
 
-- Name
-- Symbol
-- Win count
+Run the game from the command line:
 
-#### stats.json
-
-Stores persistent game statistics.
-
-Example:
-
-```json
-{
-  "player1_wins": 5,
-  "player2_wins": 3,
-  "draws": 2
-}
+```bash
+python main.py
 ```
+
+Follow the on-screen prompts to:
+
+1. Enter names for Player 1 and Player 2
+2. Select board positions (1-9) for each move
+3. Continue playing or exit after each game
+
+## Example Workflow
+
+```
+Welcome to Tic-Tac-Toe!
+
+Enter Player 1 name (X): Alice
+Enter Player 2 name (O): Bob
+
+ 1 | 2 | 3
+---+---+---
+ 4 | 5 | 6
+---+---+---
+ 7 | 8 | 9
+
+Alice (X), choose a position (1-9): 5
+
+ 1 | 2 | 3
+---+---+---
+ 4 | X | 6
+---+---+---
+ 7 | 8 | 9
+
+Bob (O), choose a position (1-9): 1
+
+ O | 2 | 3
+---+---+---
+ 4 | X | 6
+---+---+---
+ 7 | 8 | 9
+
+[Game continues...]
+
+========================
+      SCOREBOARD
+========================
+Alice (X): 5
+Bob (O): 0
+Draws: 0
+========================
+
+Would you like to play again? (y/n): n
+
+Thanks for playing!
+```
+
+## Python Concepts Demonstrated
+
+### Object-Oriented Programming
+
+- **Class design**: Separate `Player` and `TicTacToe` classes with clear responsibilities
+- **Encapsulation**: Game state and board logic contained within the `TicTacToe` class
+- **Method organization**: Logical grouping of related operations (display, validation, state management)
+
+### File Handling & Data Persistence
+
+- **JSON serialization**: `json.dump()` and `json.load()` for reading/writing statistics
+- **Exception handling**: Graceful fallback when `stats.json` doesn't exist on first run
+- **File modes**: Read (`"r"`) and write (`"w"`) operations with proper resource management
+
+### Input Validation & Error Handling
+
+- **Try-except blocks**: Catches `ValueError` for non-integer inputs and `FileNotFoundError` for missing stats file
+- **Range validation**: Ensures moves are within valid boundaries (1-9)
+- **State validation**: Checks for occupied positions before placing moves
+- **User feedback**: Clear error messages guide users toward correct input
+
+### Game Logic & Algorithm Design
+
+- **Win detection algorithm**: Checks 8 predefined winning combinations in O(1) constant time
+- **State management**: Tracks current player, board state, and win counts efficiently
+- **Turn switching**: Simple conditional logic for alternating between players
+
+## Future Improvements
+
+- **AI opponent** implementing minimax algorithm for single-player mode
+- **Difficulty levels** with varied AI strategies (random, deterministic, optimal)
+- **Game history** tracking individual game moves for replay functionality
+- **Graphical user interface** using tkinter or pygame for enhanced user experience
+- **Multiplayer networking** enabling remote games via socket communication
+- **Performance metrics** analyzing winning strategies and common patterns
+- **Unit tests** with pytest to ensure code reliability and maintainability
+
+## Learning Outcomes
+
+- Reinforced Python fundamentals including classes, control flow, and built-in functions
+- Developed proficiency with JSON for persistence layer without external databases
+- Practiced robust error handling and input validation for user-facing applications
+- Applied object-oriented design principles to separate concerns and improve code maintainability
+- Gained experience building complete, self-contained applications with proper state management
+
+````
 
 ---
 
@@ -168,7 +232,7 @@ This project demonstrates the following Python concepts:
  4 | X | 6
 ---+---+---
  7 | 8 | O
-```
+````
 
 Numbers represent available positions.
 
