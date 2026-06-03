@@ -4,7 +4,7 @@ A command-line implementation of Tic-Tac-Toe demonstrating object-oriented desig
 
 ## Why I Built This
 
-I wanted to build something complete—not just a tutorial project, but an actual game you could play multiple times and it would remember the scores. It seemed simple enough to understand quickly, but complex enough to explore core programming concepts like classes, file handling, and error checking. Plus, I enjoyed the challenge of building something with a clear purpose that works reliably from start to finish.
+I wanted to build something complete, not just a tutorial project, but an actual game you could play multiple times and it would remember the scores. It seemed simple enough to understand quickly, but complex enough to explore core programming concepts like classes, file handling, and error checking. Plus, I find it quite fun to code my own games!
 
 ## Features
 
